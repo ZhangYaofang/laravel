@@ -1,0 +1,73 @@
+@extends('layouts.app')
+
+
+@section('content')
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <div class="panel panel-default">
+        <div class="panel-heading">create new item</div>
+
+        <div class="panel-body">
+
+          @if (count($errors) > 0)
+            <div class="alert alert-danger">
+              <strong>Whoops!</strong> There were some problems with your input.<br><br>
+              <ul>
+                @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+          @endif
+
+          <form action="{{ URL('first/items') }}" method="POST" enctype="multipart/form-data">
+	  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+	    <div class="form-group">
+              <label for="firstname">Firstname</label>
+              <input type="text" name="firstname" class="form-control" required="required"
+                        placeholder="Please enter your firstname">
+             </div>
+
+	    <div class="form-group">
+              <label for="email">Email</label>
+              <input type="text" name="email" class="form-control" required="required"
+                        placeholder="Please enter your email">
+            </div>
+	  
+	    <div class="form-group">
+      		<label for="inputfile">Upload File</label>
+      		<input type="file" name="inputfile">
+   	    </div>
+
+	    
+
+
+	    <div class="radio">
+   		<label>
+      	            <input type="radio" name="check_box" value="0" checked>Yes                   
+   		</label>
+	    </div>
+	    <div class="radio">
+   		<label>
+        	<input type="radio" name="check_box" value="1">No
+   		</label>
+	    </div>
+	    
+	    <div class="form-group">
+              <label for="dropdown">Dropdown</label>
+              <input type="number" name="dropdown" min="1" max="3" required="required">
+            </div>            
+            
+	    <br>
+            <button class="btn btn-lg btn-info" >Submit</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection
+
